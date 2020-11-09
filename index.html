@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Bull Gainesville - Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+<style> 
+body { 
+  background-color: #31343a;
+  font-family: 'Amatic SC', cursive; 
+  color: #F5F5F5;
+  font-size: xx-large;
+}
+.menu {
+  float: left;
+  width: 20%;
+}
+.menuitem {
+  padding: 5px;
+  margin-top: 4px;
+  border-bottom: 1px solid #31343a;
+}
+.main { 
+  float: left;
+  width: 60%;
+  padding 0 20px;
+  overflow: hidden;
+}
+.right { 
+  background-color: white;
+  float: left; 
+  width: 20%; 
+  padding: 5px 10px;
+  margin-top: 4px;
+}
+a { color: #F5F5F5 }
+@media only screen (max-width:800px)
+{
+    /* For tablets: */
+  .main {
+    width: 80%;
+    padding: 0;
+  }
+  .right {
+    width: 100%;
+  }
+}
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .menu, .main, .right {
+    width: 100%;
+  }
+}
+tr.border_bottom td {
+  border-bottom: 1px solid #F5F5F5;
+}
+</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div style="overflow:auto">
+      <div class="menu">
+        <br><br>
+        {% for category in inventory_beers.keys() %}
+        <a href="#{{ category }}"><div class="menuitem">{{ category }}</div></a>
+        {% endfor %}
+        {% for category in inventory_wines.keys() %}
+        <a href="#{{ category }}"><div class="menuitem">{{ category }}</div></a>
+        {% endfor %}
+      </div>
+    <div class="main">
+    {% for category, beers in inventory_beers.items() %}
+    <table>
+      <thead><a name="{{ category }}"><h2>{{ category }}</h2></a></thead>
+      <tbody>
+      {% for b in beers %}
+      <tr>
+          <td style="text-align:left; width: 80%;">{{ b.name }}</td>
+          <td>{{ b.price }}</td>
+      </tr>
+      <tr class="border_bottom">
+          <td>{{ b.style }}</td>
+          <td>{{ b.abv }}</td>
+      </tr>{% endfor %}
+    {% endfor %}{% for category, wines in inventory_wines.items() %}
+    <table>
+      <thead><a name="{{ category }}"><h2>{{ category }}</h2></a></thead>
+      <tbody>
+      {% for w in wines %}
+      <tr>
+          <td style="text-align:left; width: 80%;">{{ w.name }}</td>
+          <td></td>
+          <td></td>
+          <td>{{ w.price }}</td>
+      </tr>{% endfor %}
+      </tbody>
+    </table>
+    {% endfor %}
+  </div>
+  </body>
+</html>
