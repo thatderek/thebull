@@ -1,0 +1,15 @@
+name: Infra Run 
+on:
+  push:
+    paths:
+      - 'terraform/**'
+    branches:
+      - v2
+jobs:
+  infra:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo snap install --classic opentofu
+      - run: cd terraform && tofu plan
+      - run: cd terraform && tofu apply --auto-approve
